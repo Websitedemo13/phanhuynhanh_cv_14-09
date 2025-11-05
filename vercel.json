@@ -1,16 +1,42 @@
 {
+  "framework": null,
   "buildCommand": "composer install --no-dev",
-  "framework": "php",
   "functions": {
     "api/**/*.php": {
-      "runtime": "php-8.3"
+      "runtime": "vercel-php@0.6.0"
     },
     "forms/**/*.php": {
-      "runtime": "php-8.3"
+      "runtime": "vercel-php@0.6.0"
     }
   },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/forms/(.*)",
+      "dest": "/forms/$1"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "/admin/index.html"
+    },
+    {
+      "src": "/uploads/(.*)",
+      "dest": "/uploads/$1"
+    },
+    {
+      "src": "/(.*\\.js|.*\\.css|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.svg|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.eot)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
   "env": {
-    "MONGODB_URI": "@mongodb_uri",
-    "MONGODB_DATABASE": "@mongodb_database"
+    "MONGODB_URI": "@MONGODB_URI",
+    "MONGODB_DATABASE": "@MONGODB_DATABASE"
   }
 }
